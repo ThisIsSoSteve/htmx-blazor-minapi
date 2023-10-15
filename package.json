@@ -1,0 +1,16 @@
+{
+  "scripts": {
+    "tailwind": "npx tailwindcss -i ./wwwroot/css/tailwind.css -o ./wwwroot/css/site.css --watch",
+    "dev": "dotnet watch"
+  },
+  "name": "htmx-blazor-minapi",
+  "description": "Add tailwind - done\r Add navbar - done\r Add basic layout - done\r add pages to load on nav click\r add sqllite db\r add dapper",
+  "version": "1.0.0",
+  "main": "tailwind.config.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^3.3.3"
+  }
+}
