@@ -9,11 +9,12 @@ public static class HomeEndpoints
     {
         app.MapGet("/", () =>
         {
-            return Results.Extensions.Html(
+            return Results.Content(
                 new ComponentRenderer<HomePage>()
                 //.Set(x => x.Text, "This is a button you can click")
                 .UseLayout<Layout>()
                 .Render()
+                , "text/html"
             );
         });
 
@@ -39,14 +40,15 @@ public static class HomeEndpoints
             //     }
             // };
 
+
             var data = service.GetMovies();
 
-
-            return Results.Extensions.Html(
+            return Results.Content(
                 new ComponentRenderer<MovieThumbnails>()
                 .Set(x => x.Data, data)
-                .Render()
+                .Render(), "text/html"
             );
+
         });
 
         return app;

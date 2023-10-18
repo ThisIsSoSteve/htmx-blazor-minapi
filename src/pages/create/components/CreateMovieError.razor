@@ -1,0 +1,13 @@
+@namespace Create
+
+<div class="bg-red-300 text-white">
+    Error
+    <p>
+        @Message
+    </p>
+</div>
+
+@code {
+    [Parameter]
+    public string Message { get; set; }
+}

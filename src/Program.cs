@@ -31,13 +31,14 @@ builder.Services.AddScoped<IHomeService, HomeService>();
 builder.Services.AddScoped<ICreateService, CreateService>();
 
 //builder.Services.AddRazorPages();
-
+builder.Services.AddAntiforgery();
 
 var app = builder.Build();
 
 EnsureDb(app.Services);
 
 app.UseStaticFiles();
+
 
 app.MapAccountEndpoints();
 app.MapHomePageEndpoints();

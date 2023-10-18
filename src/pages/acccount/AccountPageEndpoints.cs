@@ -15,10 +15,11 @@ public static class AccountPageEndpoints
     {
         app.MapGet("/account/login", () =>
         {
-            return Results.Extensions.Html(
+            return Results.Content(
                 new ComponentRenderer<Login>()
                 .UseLayout<Layout>()
-                .Render()
+                .Render(),
+                "text/html"
             );
         });
 
@@ -32,45 +33,46 @@ public static class AccountPageEndpoints
             new Claim(ClaimTypes.Role, "Administrator"),
         };
 
-        var claimsIdentity = new ClaimsIdentity(
-            claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            var claimsIdentity = new ClaimsIdentity(
+                claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
-        var authProperties = new AuthenticationProperties
-        {
-            //AllowRefresh = <bool>,
-            // Refreshing the authentication session should be allowed.
+            var authProperties = new AuthenticationProperties
+            {
+                //AllowRefresh = <bool>,
+                // Refreshing the authentication session should be allowed.
 
-            //ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(10),
-            // The time at which the authentication ticket expires. A 
-            // value set here overrides the ExpireTimeSpan option of 
-            // CookieAuthenticationOptions set with AddCookie.
+                //ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(10),
+                // The time at which the authentication ticket expires. A 
+                // value set here overrides the ExpireTimeSpan option of 
+                // CookieAuthenticationOptions set with AddCookie.
 
-            //IsPersistent = true,
-            // Whether the authentication session is persisted across 
-            // multiple requests. When used with cookies, controls
-            // whether the cookie's lifetime is absolute (matching the
-            // lifetime of the authentication ticket) or session-based.
+                //IsPersistent = true,
+                // Whether the authentication session is persisted across 
+                // multiple requests. When used with cookies, controls
+                // whether the cookie's lifetime is absolute (matching the
+                // lifetime of the authentication ticket) or session-based.
 
-            //IssuedUtc = <DateTimeOffset>,
-            // The time at which the authentication ticket was issued.
+                //IssuedUtc = <DateTimeOffset>,
+                // The time at which the authentication ticket was issued.
 
-            //RedirectUri = <string>
-            // The full path or absolute URI to be used as an http 
-            // redirect response value.
-        };
+                //RedirectUri = <string>
+                // The full path or absolute URI to be used as an http 
+                // redirect response value.
+            };
             await context.SignInAsync(
-            CookieAuthenticationDefaults.AuthenticationScheme, 
-            new ClaimsPrincipal(claimsIdentity), 
+            CookieAuthenticationDefaults.AuthenticationScheme,
+            new ClaimsPrincipal(claimsIdentity),
             authProperties);
 
             //return LocalRedirect(Url.GetLocalUrl(returnUrl));
-            
-            
+
+
 
             //return Results.LocalRedirect("/authtest");
 
-            return Results.Extensions.Html(
-                "<div> logged in </div>"
+            return Results.Content(
+                "<div> logged in </div>",
+                "text/html"
             );
         });
 

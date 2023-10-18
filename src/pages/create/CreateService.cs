@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Create;
 public interface ICreateService
 {
-    MovieDto Insert(CreateMovieViewModel data);
+    int Insert(CreateMovieViewModel data);
 }
 
 public class CreateService : ICreateService
@@ -16,9 +16,8 @@ public class CreateService : ICreateService
         this.db = db;
     }
 
-    public MovieDto Insert(CreateMovieViewModel data)
+    public int Insert(CreateMovieViewModel data)
     {
-
         var newMovie = db.QuerySingleOrDefault<Movie>(
             @"INSERT INTO Movie(Title, Description) VALUES (@Title, @Description)
             RETURNING *", data
@@ -26,10 +25,10 @@ public class CreateService : ICreateService
 
         if(newMovie == null)
         {
-            return new MovieDto{Id = -1};
+            return -1;
         }
 
-        return newMovie.ToDto();
+        return newMovie.Id;
     }
 }
 
